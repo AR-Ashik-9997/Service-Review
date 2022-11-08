@@ -14,7 +14,7 @@ const AllServicesCards = ({data}) => {
           </div>
           <Card.Text>{description}</Card.Text>
           <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
+        </Card.Body>        
       </Card>
     </Col>
   );
