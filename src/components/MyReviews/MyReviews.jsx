@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
 
-const MyReviews = () => {
+const MyReviews = () => { 
   const data = useLoaderData();
   return (
     <div className="home-container">

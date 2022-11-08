@@ -6,13 +6,12 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import ServiceDetailsCard from "../ServiceDetailsCard/ServiceDetailsCard";
 
 const DetailsService = () => {
-  const DetailsData = useLoaderData();
-  console.log(DetailsData);
+  const DetailsData = useLoaderData();  
   return (
     <Container>
       <Row>
         <ServiceDetailsCard data={DetailsData} />
-        <ReviewForm />
+        <ReviewForm data={DetailsData} />
       </Row>
     </Container>
   );
