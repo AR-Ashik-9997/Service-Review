@@ -12,8 +12,10 @@ const AllServicesCards = ({data}) => {
             <Card.Title>{name}</Card.Title>
             <Card.Title>{price}</Card.Title>
           </div>
-          <Card.Text>{description}</Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Card.Text>{description.substr(0, 100) + "."}</Card.Text>
+          <div className="d-flex justify-content-end">
+          <Button variant="outline-info">View Details</Button>
+          </div> 
         </Card.Body>        
       </Card>
     </Col>
