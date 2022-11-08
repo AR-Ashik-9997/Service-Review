@@ -4,7 +4,7 @@ import { Button, Card, Col } from "react-bootstrap";
 const ServiceCard = ({ data }) => {
   const { name, image, price, description } = data;
   return (
-    <Col lg={4} md={4} sm={12}>
+    <Col lg={4} md={6} sm={12}>
       <Card className="mt-3">
         <Card.Img variant="top" src={image} />
         <Card.Body>
