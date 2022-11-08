@@ -1,14 +1,18 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React from "react";
+import { Container, Row } from "react-bootstrap";
+import { useLoaderData } from "react-router-dom";
+import ServiceDetailsCard from "../ServiceDetailsCard/ServiceDetailsCard";
 
 const DetailsService = () => {
-    const DetailsData=useLoaderData();
-    console.log(DetailsData);
-    return (
-        <div>
-            <h1>this details service page</h1>
-        </div>
-    );
+  const DetailsData = useLoaderData();
+  console.log(DetailsData);
+  return (
+    <Container>
+      <Row>
+        <ServiceDetailsCard data={DetailsData}/>
+      </Row>
+    </Container>
+  );
 };
 
 export default DetailsService;
