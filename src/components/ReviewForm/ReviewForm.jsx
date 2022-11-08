@@ -21,7 +21,7 @@ const ReviewForm = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicDescription">
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlTextarea1"
                   placeholder="Your Review here...."
                   rows="3"

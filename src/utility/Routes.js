@@ -21,7 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <PrivateRoute><AllServices /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AllServices />
+          </PrivateRoute>
+        ),
         loader: async () => fetch("http://localhost:5000/all-services"),
       },
       {
@@ -31,7 +35,14 @@ const router = createBrowserRouter([
           fetch(`http://localhost:5000/details-services/${params.id}`),
       },
       { path: "/my-review", element: <MyReviews /> },
-      { path: "/add-service", element: <AddServices /> },
+      {
+        path: "/add-service",
+        element: (
+          <PrivateRoute>
+            <AddServices />
+          </PrivateRoute>
+        ),
+      },
       { path: "/sign-in", element: <Login /> },
       { path: "/sign-up", element: <SignUp /> },
     ],
