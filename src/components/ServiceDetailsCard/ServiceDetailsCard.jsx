@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
-const ServiceDetailsCard = ({data}) => {
-    const {name, image, price, description } = data;
+const ServiceDetailsCard = ({ data }) => {
+  const { name, image, price, description } = data;
   return (
     <Col lg={7} md={6} sm={12}>
       <Card className="mt-3">
@@ -17,7 +17,7 @@ const ServiceDetailsCard = ({data}) => {
             <Card.Title>{name}</Card.Title>
             <Card.Title>{price}</Card.Title>
           </div>
-          <Card.Text>{description}</Card.Text>         
+          <Card.Text>{description}</Card.Text>
         </Card.Body>
       </Card>
     </Col>

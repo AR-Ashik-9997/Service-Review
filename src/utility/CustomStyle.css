@@ -1,4 +1,12 @@
-.pointer{
-    cursor: pointer;
-    
+.pointer {
+  cursor: pointer;
+}
+.card-review{
+overflow-y: scroll;
+height: 400px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
