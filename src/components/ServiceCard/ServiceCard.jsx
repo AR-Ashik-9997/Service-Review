@@ -2,9 +2,11 @@ import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ data }) => {
-  const { name, image, price, description } = data;
+  const {_id, name, image, price, description } = data;
+
   return (
     <Col lg={4} md={6} sm={12}>
       <Card className="mt-3">
@@ -20,7 +22,7 @@ const ServiceCard = ({ data }) => {
           </div>
           <Card.Text>{description.substr(0, 100) + "."}</Card.Text>
           <div className="d-flex justify-content-end">
-            <Button variant="outline-info">View Details</Button>
+            <Link to={`/details-service/${_id}`}><Button variant="outline-info">View Details</Button></Link>
           </div>
         </Card.Body>
       </Card>

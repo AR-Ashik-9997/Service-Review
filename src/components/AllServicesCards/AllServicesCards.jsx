@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const AllServicesCards = ({data}) => {
-    const { name, image, price, description } = data;
+    const { _id,name, image, price, description } = data;
   return (
     <Col lg={4} md={6} sm={12}>
       <Card className="mt-3">
@@ -14,7 +15,7 @@ const AllServicesCards = ({data}) => {
           </div>
           <Card.Text>{description.substr(0, 100) + "."}</Card.Text>
           <div className="d-flex justify-content-end">
-          <Button variant="outline-info">View Details</Button>
+          <Link to={`/details-service/${_id}`}><Button variant="outline-info">View Details</Button></Link>
           </div> 
         </Card.Body>        
       </Card>
