@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import * as EmailValidator from 'email-validator';
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import * as EmailValidator from "email-validator";
 import { BiLogInCircle } from "react-icons/bi";
-const Login = () => {  
+import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../utility/AuthProvider";
+const Login = () => {
+  const navigate = useNavigate();
+  const { signInGoogle, SignInForm, signInGithub } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [userInfo, setUserInfo] = useState({
     email: "",
   });
@@ -29,10 +36,30 @@ const Login = () => {
     const form = event.target;
     const password = form.password.value;
     const email = userInfo.email;
-    console.log(email, password);    
+    SignInForm(email, password)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        setErrors({ ...errors, firebase: "" });
+        form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setErrors({ ...errors, firebase: error.message });
+      });
   };
 
-  
+  const googleSignIn = () => {
+    signInGoogle(googleProvider)
+      .then(() => {
+        setErrors({ ...errors, firebase: "" });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setErrors({ ...errors, firebase: error.message });
+      });
+  };
+
   return (
     <Container className="home-container">
       <Row>
@@ -68,17 +95,17 @@ const Login = () => {
                   placeholder="Password"
                   className="rounded-3 mb-2"
                   required
-                  autoComplete="off"                 
+                  autoComplete="off"
                 />
                 <Form.Text className="text-danger">{errors.firebase}</Form.Text>
-              </Form.Group>             
+              </Form.Group>
               <div className="d-flex justify-content-center">
                 <Button
                   variant="outline-info"
                   type="submit"
                   className="w-50  mb-4 rounded-3"
                 >
-                  Sign-In <BiLogInCircle className="fs-5"/>
+                  Sign-In <BiLogInCircle className="fs-5" />
                 </Button>
               </div>
             </Form>
@@ -93,13 +120,10 @@ const Login = () => {
               </NavLink>
             </p>
             <div className="d-flex justify-content-center mb-5">
-              <Button variant="outline-dark">
+              <Button variant="outline-dark" onClick={googleSignIn}>
                 <FcGoogle className="fs-1" />
               </Button>
-              <Button
-                variant="outline-dark"
-                className="ms-4"                
-              >
+              <Button variant="outline-dark" className="ms-4">
                 <BsGithub className="fs-1" />
               </Button>
             </div>

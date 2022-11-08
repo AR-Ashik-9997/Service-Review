@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import * as EmailValidator from "email-validator";
+import { AuthContext } from "../../utility/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-
+    const navigate=useNavigate();
+  const { signUp, updateUserProfile } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -57,9 +60,31 @@ const SignUp = () => {
     const photo = form.photoUrl.value;
     const email = userInfo.email;
     const password = userInfo.password;
-    console.log(photo);    
+    signUp(email, password)
+      .then(() => {
+        setErrors({ ...errors, firebase: "" });
+        form.reset();
+        handleupdateProfile(username, photo);        
+        navigate("/");
+      })
+      .catch((error) => {
+        setErrors({ ...errors, firebase: error.message });
+      });
   };
-  
+  const handleupdateProfile = (name, photoUrl) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoUrl,
+    };
+    updateUserProfile(profile)
+      .then(() => {
+        setErrors({ ...errors, firebase: "" });
+      })
+      .catch((error) => {
+        setErrors({ ...errors, firebase: error.message });
+      });
+  };
+
   return (
     <Container className="home-container">
       <Row>
@@ -133,7 +158,7 @@ const SignUp = () => {
             </Form>
           </div>
         </Col>
-      </Row>     
+      </Row>
     </Container>
   );
 };

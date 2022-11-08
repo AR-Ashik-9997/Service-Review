@@ -3,6 +3,7 @@ import AllServices from "../components/AllServices/AllServices";
 import DetailsService from "../components/DetailsService/DetailsService";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import SignUp from "../components/Register/SignUp";
 import Root from "./Root";
 
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/services",
-        element: <AllServices />,
+        element: <PrivateRoute><AllServices /></PrivateRoute>,
         loader: async () => fetch("http://localhost:5000/all-services"),
       },
       {
