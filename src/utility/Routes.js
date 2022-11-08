@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Home /> },
+      { path: "/", element: <Home />,loader:async()=>fetch('http://localhost:5000/services')},
       { path: "/sign-in", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],
