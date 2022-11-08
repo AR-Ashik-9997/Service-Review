@@ -9,7 +9,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
 const Login = () => {
   const navigate = useNavigate();
-  const { signInGoogle, SignInForm, signInGithub } = useContext(AuthContext);
+  const { signInGoogle, SignInForm } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

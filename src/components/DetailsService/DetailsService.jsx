@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { Form, useLoaderData } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
+import { useLoaderData } from "react-router-dom";
 import ReviewForm from "../ReviewForm/ReviewForm";
 
 import ServiceDetailsCard from "../ServiceDetailsCard/ServiceDetailsCard";
@@ -12,7 +12,7 @@ const DetailsService = () => {
     <Container>
       <Row>
         <ServiceDetailsCard data={DetailsData} />
-        <ReviewForm/>
+        <ReviewForm />
       </Row>
     </Container>
   );
