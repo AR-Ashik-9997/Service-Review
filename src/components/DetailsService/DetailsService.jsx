@@ -1,12 +1,12 @@
-import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
+
 import ReviewForm from "../ReviewForm/ReviewForm";
 
 import ServiceDetailsCard from "../ServiceDetailsCard/ServiceDetailsCard";
 
 const DetailsService = () => {
-  const DetailsData = useLoaderData();  
+  const DetailsData = useLoaderData();
   return (
     <Container>
       <Row>

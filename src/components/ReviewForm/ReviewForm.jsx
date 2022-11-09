@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
 import ServiceReview from "../ServiceReview/ServiceReview";
 const ReviewForm = ({ data }) => {
   const { user } = useContext(AuthContext);
+  const location = useLocation()
   const [reviews, setReviews] = useState([]);
   const { _id } = data;
 
@@ -68,58 +70,72 @@ const ReviewForm = ({ data }) => {
               </Card.Body>
             </Card>
           </div>
-          <div>
-            <Form className="mt-5" onSubmit={handleSubmit}>
-              <Row>
-                <Form.Group
-                  as={Col}
-                  className="mb-3"
-                  controlId="formBasicEmail"
-                >
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    defaultValue={user?.email}
-                    readOnly
-                  />
-                </Form.Group>
-                <Form.Group as={Col} className="mb-3" controlId="formBasicName">
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    defaultValue={user?.displayName}
-                    readOnly
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicRatings">
-                  <Form.Control
-                    type="number"
-                    step="any"
-                    placeholder="Ratings"
-                    name="ratings"
-                    required
-                    autoComplete="off"
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicDescription">
-                  <textarea
-                    className="form-control"
-                    id="exampleFormControlTextarea1"
-                    placeholder="Your Review here...."
-                    rows="3"
-                    name="description"
-                    required
-                    autoComplete="off"
-                  />
-                </Form.Group>
-              </Row>
-              <div className="d-flex justify-content-end">
-                <Button variant="outline-info" type="submit" className="mb-5">
-                  Review
-                </Button>
-              </div>
-            </Form>
-          </div>
+          {user?.uid ? (
+            <div>
+              <Form className="mt-5" onSubmit={handleSubmit}>
+                <Row>
+                  <Form.Group
+                    as={Col}
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                  >
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      defaultValue={user?.email}
+                      readOnly
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    as={Col}
+                    className="mb-3"
+                    controlId="formBasicName"
+                  >
+                    <Form.Control
+                      type="text"
+                      name="name"
+                      defaultValue={user?.displayName}
+                      readOnly
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicRatings">
+                    <Form.Control
+                      type="number"
+                      step="any"
+                      placeholder="Ratings"
+                      name="ratings"
+                      required
+                      autoComplete="off"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicDescription">
+                    <textarea
+                      className="form-control"
+                      id="exampleFormControlTextarea1"
+                      placeholder="Your Review here...."
+                      rows="3"
+                      name="description"
+                      required
+                      autoComplete="off"
+                    />
+                  </Form.Group>
+                </Row>
+                <div className="d-flex justify-content-end">
+                  <Button variant="outline-info" type="submit" className="mb-5">
+                    Review
+                  </Button>
+                </div>
+              </Form>
+            </div>
+          ) : (
+            <div className="d-flex justify-content-end">
+              <p className="mt-5 me-4 text-danger">Please login to add a review</p>
+              <Link to='/sign-in' state={{ from: location }} replace><Button variant="outline-info" type="submit" className="mt-5 mb-5">
+                Sign-In
+              </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </Col>
