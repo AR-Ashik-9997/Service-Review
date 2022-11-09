@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import AddServices from "../components/AddServices/AddServices";
 import AllServices from "../components/AllServices/AllServices";
+import Blog from "../components/Blogs/Blog";
 import DetailsService from "../components/DetailsService/DetailsService";
 import Home from "../components/Home/Home";
 import Login from "../components/Login/Login";
@@ -35,9 +36,24 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/details-services/${params.id}`),
       },
-      { path: "/my-review", element: <PrivateRoute><MyReviews /></PrivateRoute>},
-      { path: "/update-review/:id", element: <PrivateRoute><UpdateReview /></PrivateRoute>,loader: async ({ params }) =>
-      fetch(`http://localhost:5000/update-reviews/${params.id}`)},
+      {
+        path: "/my-review",
+        element: (
+          <PrivateRoute>
+            <MyReviews />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-review/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateReview />
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/update-reviews/${params.id}`),
+      },
       {
         path: "/add-service",
         element: (
@@ -46,6 +62,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {path: "/blog",element:<Blog/>},
       { path: "/sign-in", element: <Login /> },
       { path: "/sign-up", element: <SignUp /> },
     ],

@@ -22,6 +22,9 @@ const Header = () => {
             <Nav.Link as={Link} className="fs-5" to="/">
               Home
             </Nav.Link>
+            <Nav.Link as={Link} className="fs-5 me-2" to="/blog">
+              Blog
+            </Nav.Link>
             {user && user?.photoURL ? (
               <>
                 <Nav.Link as={Link} className="fs-5" to="/my-review">
