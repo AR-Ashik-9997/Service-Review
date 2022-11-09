@@ -1,0 +1,144 @@
+import React, { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useLoaderData } from "react-router-dom";
+
+const UpdateReview = () => {
+  const reviewData = useLoaderData();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form= event.target;
+    const image= form.image.value;
+    const name= form.name.value;
+    const serviceName= form.serviceName.value;
+    const rating= form.rating.value;
+    const description= form.description.value;
+
+    const update={
+        image: image,
+        name: name,
+        serviceName: serviceName,
+        rating: rating,
+        description: description,
+    }
+
+    fetch(`http://localhost:5000/update-reviews/${reviewData._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(update),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      });  
+   
+  };
+  
+  return (
+    <Container className="home-container">
+      <Row>
+        <Col lg={6} md={6} sm={12}>
+          <div className="mt-5 pt-5">
+            <img
+              src="https://cdni.iconscout.com/illustration/premium/thumb/sign-up-login-4489366-3723273.png"
+              alt=""
+              className="d-block img-fluid mx-auto"
+            />
+          </div>
+        </Col>
+        <Col lg={6} md={6} sm={12} className="d-flex align-items-center pt-5">
+          <div className="bg-white w-75 rounded-4 mx-auto mt-5 mb-5">
+            <h1 className="text-center mb-4 pt-5">Update Review</h1>
+            <Form className="mx-auto w-75" onSubmit={handleSubmit}>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Control                
+                  type="text"
+                  name="image"
+                  placeholder="photo-url"
+                  defaultValue={reviewData.image}
+                  autoFocus
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput2"
+              >
+                <Form.Control
+                 
+                  name="name"
+                  type="text"
+                  placeholder="username"
+                  defaultValue={reviewData.name}
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput3"
+              >
+                <Form.Control
+              
+                  name="serviceName"
+                  type="text"
+                  placeholder="serviceName"
+                  defaultValue={reviewData.serviceName}
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput4"
+              >
+                <Form.Control
+                 
+                  name="rating"
+                  type="number"
+                  step="any"
+                  placeholder="Ratings"
+                  defaultValue={reviewData.rating}
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Control
+                 
+                  name="description"
+                  as="textarea"
+                  defaultValue={reviewData.description}
+                  rows={3}
+                  placeholder="Description here...."
+                  required
+                  autoComplete="off"
+                />
+              </Form.Group>
+              <div className="d-flex justify-content-center pb-5 pt-4">
+                <Button
+                  variant="outline-info"
+                  type="submit"
+                  className="w-75 mb-4 rounded-3"
+                >
+                  Sign-Up
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default UpdateReview;

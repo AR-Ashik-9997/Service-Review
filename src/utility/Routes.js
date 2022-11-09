@@ -7,6 +7,7 @@ import Login from "../components/Login/Login";
 import MyReviews from "../components/MyReviews/MyReviews";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import SignUp from "../components/Register/SignUp";
+import UpdateReview from "../components/UpdateReview/UpdateReview";
 import Root from "./Root";
 
 const router = createBrowserRouter([
@@ -34,7 +35,9 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`http://localhost:5000/details-services/${params.id}`),
       },
-      { path: "/my-review", element: <MyReviews />,loader: async () => fetch("http://localhost:5000/services")},
+      { path: "/my-review", element: <PrivateRoute><MyReviews /></PrivateRoute>},
+      { path: "/update-review/:id", element: <PrivateRoute><UpdateReview /></PrivateRoute>,loader: async ({ params }) =>
+      fetch(`http://localhost:5000/update-reviews/${params.id}`)},
       {
         path: "/add-service",
         element: (

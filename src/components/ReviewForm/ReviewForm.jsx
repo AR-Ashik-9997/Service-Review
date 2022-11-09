@@ -7,7 +7,6 @@ const ReviewForm = ({ data }) => {
   const { user } = useContext(AuthContext);
   const location = useLocation()
   const [reviews, setReviews] = useState([]);
-  const { _id } = data;
 
   useEffect(() => {
     fetch(`http://localhost:5000/all-reviews?serviceId=${data._id}`)
@@ -23,7 +22,8 @@ const ReviewForm = ({ data }) => {
     const rating = form.ratings.value;
     const description = form.description.value;
     const review = {
-      serviceId: _id,
+      serviceId: data._id,
+      serviceName:data.name,
       rating: rating,
       description: description,
       email: email,
