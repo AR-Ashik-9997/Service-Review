@@ -14,10 +14,11 @@ const ServiceDetailsCard = ({ data }) => {
         </PhotoProvider>
         <Card.Body>
           <div className="d-flex justify-content-between">
-            <Card.Title>{name}</Card.Title>
-            <Card.Title>{price}</Card.Title>
+            <Card.Title className="fs-2">{name}</Card.Title>
+            <Card.Title className="fs-2">{price}</Card.Title>            
           </div>
-          <Card.Text>{description}</Card.Text>
+          <hr />
+          <Card.Text className="text-justify">{description}</Card.Text>
         </Card.Body>
       </Card>
     </Col>

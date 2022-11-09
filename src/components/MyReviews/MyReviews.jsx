@@ -34,8 +34,10 @@ const MyReviews = () => {
       <Container>
         <Row>
           <Col lg={12} md={12} sm={12}>
-            <div className="mt-5">
-              <Table striped bordered hover>
+            <div className="mt-5 mb-5 home-container">
+              {
+                userReviews.length > 0?(
+                  <Table striped bordered hover>
                 <thead>
                   <tr>
                     <th className="text-white text-center">Image</th>
@@ -64,7 +66,7 @@ const MyReviews = () => {
                       <td className="text-white text-center">
                         {review.rating}
                       </td>
-                      <td className="text-white text-center">
+                      <td className="text-white text-justify">
                         {review.description}
                       </td>
                       <td className="text-white text-center">
@@ -81,6 +83,11 @@ const MyReviews = () => {
                   ))}
                 </tbody>
               </Table>
+                ):(
+                  <h1 className="text-white text-center mt-5">Your Review is Empty</h1>
+                )
+              }
+              
             </div>
           </Col>
         </Row>

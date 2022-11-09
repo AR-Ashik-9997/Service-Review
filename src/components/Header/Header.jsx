@@ -40,7 +40,7 @@ const Header = () => {
                   <img
                     src={user?.photoURL}
                     variant="top"
-                    className="user-profile "
+                    className="user-profile me-2"
                     alt="Avatar"
                   />
                 </Nav.Link>

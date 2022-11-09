@@ -13,7 +13,6 @@ const UpdateReview = () => {
     const serviceName= form.serviceName.value;
     const rating= form.rating.value;
     const description= form.description.value;
-
     const update={
         image: image,
         name: name,

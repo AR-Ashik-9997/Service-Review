@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
 import ServiceReview from "../ServiceReview/ServiceReview";
 const ReviewForm = ({ data }) => {
   const { user } = useContext(AuthContext);
-  const location = useLocation()
+  const location = useLocation();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ReviewForm = ({ data }) => {
     const description = form.description.value;
     const review = {
       serviceId: data._id,
-      serviceName:data.name,
+      serviceName: data.name,
       rating: rating,
       description: description,
       email: email,
@@ -52,21 +52,25 @@ const ReviewForm = ({ data }) => {
             <h1 className="mt-5 mb-4 text-center">Review Contents</h1>
             <Card>
               <Card.Body className="card-review">
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th className="text-center">image</th>
-                      <th className="text-center">Name</th>
-                      <th className="text-center">Ratings</th>
-                      <th className="text-center">description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reviews.map((reviw) => (
-                      <ServiceReview key={reviw._id} data={reviw} />
-                    ))}
-                  </tbody>
-                </Table>
+                {reviews.length > 0 ? (
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th className="text-center">image</th>
+                        <th className="text-center">Name</th>
+                        <th className="text-center">Ratings</th>
+                        <th className="text-center">description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reviews.map((reviw) => (
+                        <ServiceReview key={reviw._id} data={reviw} />
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  <h4 className="text-center">Empty Review</h4>
+                )}
               </Card.Body>
             </Card>
           </div>
@@ -129,10 +133,17 @@ const ReviewForm = ({ data }) => {
             </div>
           ) : (
             <div className="d-flex justify-content-end">
-              <p className="mt-5 me-4 text-danger">Please login to add a review</p>
-              <Link to='/sign-in' state={{ from: location }} replace><Button variant="outline-info" type="submit" className="mt-5 mb-5">
-                Sign-In
-              </Button>
+              <p className="mt-5 me-4 text-danger">
+                Please login to add a review
+              </p>
+              <Link to="/sign-in" state={{ from: location }} replace>
+                <Button
+                  variant="outline-info"
+                  type="submit"
+                  className="mt-5 mb-5"
+                >
+                  Sign-In
+                </Button>
               </Link>
             </div>
           )}
