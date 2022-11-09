@@ -9,7 +9,7 @@ const AddServices = () => {
   const notify = () => toast.success("Services Successfuly Added");
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:5000/add-services", {
+    fetch("https://service-data.vercel.app/add-services", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

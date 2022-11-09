@@ -22,7 +22,7 @@ const UpdateReview = () => {
         description: description,
     }
 
-    fetch(`http://localhost:5000/update-reviews/${reviewData._id}`, {
+    fetch(`https://service-data.vercel.app/update-reviews/${reviewData._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

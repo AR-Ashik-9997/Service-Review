@@ -17,15 +17,15 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "/",element: <Home />,loader: async () => fetch("http://localhost:5000/services"),
+        path: "/",element: <Home />,loader: async () => fetch("https://service-data.vercel.app/services"),
       },
-      {path: "/services",element: <AllServices />,loader: async () => fetch("http://localhost:5000/all-services"),
+      {path: "/services",element: <AllServices />,loader: async () => fetch("https://service-data.vercel.app/all-services"),
       },
       {
         path: "/details-service/:id",
         element: <DetailsService />,
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/details-services/${params.id}`),
+          fetch(`https://service-data.vercel.app/details-services/${params.id}`),
       },
       {
         path: "/my-review",
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/update-reviews/${params.id}`),
+          fetch(`https://service-data.vercel.app/update-reviews/${params.id}`),
       },
       {
         path: "/add-service",

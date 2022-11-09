@@ -12,7 +12,7 @@ const ReviewForm = ({ data }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/all-reviews?serviceId=${data._id}`)
+    fetch(`https://service-data.vercel.app/all-reviews?serviceId=${data._id}`)
       .then((response) => response.json())
       .then((data) => setReviews(data));
   }, [data._id]);
@@ -33,7 +33,7 @@ const ReviewForm = ({ data }) => {
       name: name,
       image: user?.photoURL,
     };
-    fetch("http://localhost:5000/add-review", {
+    fetch("https://service-data.vercel.app/add-review", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

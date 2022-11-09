@@ -17,7 +17,7 @@ const ServiceDetailsCard = ({ data }) => {
         <Card.Body>
           <div className="d-flex justify-content-between">
             <Card.Title className="fs-2">{name}</Card.Title>
-            <Card.Title className="fs-2">{price}</Card.Title>            
+            <Card.Title className="fs-2">${price}</Card.Title>            
           </div>
           <hr />
           <Card.Text className="text-justify">{description}</Card.Text>

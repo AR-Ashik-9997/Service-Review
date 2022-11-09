@@ -9,7 +9,7 @@ const MyReviews = () => {
   const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user-reviews?email=${user.email}`, {
+    fetch(`https://service-data.vercel.app/user-reviews?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("secret-token")}`,
       },
@@ -28,7 +28,7 @@ const MyReviews = () => {
       `Are you sure you want to delete: ${review.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/review-delete/${review._id}`, {
+      fetch(`https://service-data.vercel.app/review-delete/${review._id}`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("secret-token")}`,
