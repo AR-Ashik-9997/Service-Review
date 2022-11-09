@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import useTitle from "../../utility/tittleHooks";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AddServices = () => {
  useTitle("Add Services");
   const [user, setUser] = useState({});
+  const notify = () => toast.success("Services Successfuly Added");
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:5000/add-services", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
       },
       body: JSON.stringify(user),
     })
@@ -30,7 +33,7 @@ const AddServices = () => {
   };
   return (
     <div className="home-container">
-      <Container>
+      <Container className="top-margin">
         <Row>
           <Col lg={6} md={6} sm={12}>
             <div className="mt-5">
@@ -87,6 +90,7 @@ const AddServices = () => {
                   type="submit"
                     variant="outline-info"                    
                     className="w-75 rounded-3 mb-5"
+                    onClick={notify}
                   >
                     Add service
                   </Button>
@@ -96,6 +100,18 @@ const AddServices = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer
+      position="top-center"
+      autoClose={500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+       />
     </div>
   );
 };

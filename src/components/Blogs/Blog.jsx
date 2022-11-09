@@ -5,7 +5,7 @@ import useTitle from "../../utility/tittleHooks";
 const Blog = () => {
   useTitle("Blog");
   return (
-    <div className="home-container mt-5 pt-5">
+    <div className="home-container top-margin">
       <Container>
         <Row>
           <Col lg={12} md={12} sm={12}>

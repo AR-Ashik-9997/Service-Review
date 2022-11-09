@@ -17,18 +17,9 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "/",
-        element: <Home />,
-        loader: async () => fetch("http://localhost:5000/services"),
+        path: "/",element: <Home />,loader: async () => fetch("http://localhost:5000/services"),
       },
-      {
-        path: "/services",
-        element: (
-          <PrivateRoute>
-            <AllServices />
-          </PrivateRoute>
-        ),
-        loader: async () => fetch("http://localhost:5000/all-services"),
+      {path: "/services",element: <AllServices />,loader: async () => fetch("http://localhost:5000/all-services"),
       },
       {
         path: "/details-service/:id",
@@ -62,7 +53,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {path: "/blog",element:<Blog/>},
+      { path: "/blog", element: <Blog /> },
       { path: "/sign-in", element: <Login /> },
       { path: "/sign-up", element: <SignUp /> },
     ],

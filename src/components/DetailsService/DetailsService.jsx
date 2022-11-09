@@ -8,12 +8,14 @@ import ServiceDetailsCard from "../ServiceDetailsCard/ServiceDetailsCard";
 const DetailsService = () => {
   const DetailsData = useLoaderData();
   return (
+    <div className="top-margin">
     <Container>
       <Row>
         <ServiceDetailsCard data={DetailsData} />
         <ReviewForm data={DetailsData} />
       </Row>
     </Container>
+    </div>
   );
 };
 

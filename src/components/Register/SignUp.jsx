@@ -4,9 +4,12 @@ import * as EmailValidator from "email-validator";
 import { AuthContext } from "../../utility/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import useTitle from "../../utility/tittleHooks";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
-  useTitle('Sign-up')
+  const notify = () => toast.success("Sign-in success!");
+  useTitle("Sign-up");
   const navigate = useNavigate();
   const { signUp, updateUserProfile } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
@@ -63,10 +66,25 @@ const SignUp = () => {
     const email = userInfo.email;
     const password = userInfo.password;
     signUp(email, password)
-      .then(() => {
+      .then((res) => {
+        handleupdateProfile(username, photo);
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem("secret-token", data.token);
+          });
         setErrors({ ...errors, firebase: "" });
         form.reset();
-        handleupdateProfile(username, photo);
         navigate("/");
       })
       .catch((error) => {
@@ -153,6 +171,7 @@ const SignUp = () => {
                   variant="outline-info"
                   type="submit"
                   className="w-75 mb-4 rounded-3"
+                  onClick={notify}
                 >
                   Sign-Up
                 </Button>
@@ -161,6 +180,18 @@ const SignUp = () => {
           </div>
         </Col>
       </Row>
+      <ToastContainer
+      position="top-center"
+      autoClose={500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+       />
     </Container>
   );
 };

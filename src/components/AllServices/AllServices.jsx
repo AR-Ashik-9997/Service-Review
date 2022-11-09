@@ -7,13 +7,18 @@ const AllServices = () => {
   useTitle("All services");
   const AllServicesData = useLoaderData();
   return (
-    <Container>
+    <div className="home-container mt-5">
+    <Container className="mt-5 mb-5">
+      <div className="pt-5">
+        <h1 className="text-center text-white mt-5 mb-3">All Services</h1>
+      </div>
       <Row>
         {AllServicesData.map((services) => (
           <AllServicesCards data={services} key={services._id} />
         ))}
       </Row>
     </Container>
+    </div>
   );
 };
 

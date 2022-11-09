@@ -3,7 +3,10 @@ import { Button, Card, Col, Form, Row, Table } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
 import ServiceReview from "../ServiceReview/ServiceReview";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ReviewForm = ({ data }) => {
+  const notify = () => toast.success("Successfully review added!");
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [reviews, setReviews] = useState([]);
@@ -34,6 +37,7 @@ const ReviewForm = ({ data }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,        
       },
       body: JSON.stringify(review),
     })
@@ -46,7 +50,7 @@ const ReviewForm = ({ data }) => {
 
   return (
     <Col lg={5} md={6} sm={12}>
-      <div className=" bg-white rounded-4 mx-auto d-flex justify-content-center">
+      <div className=" mt-3 bg-white rounded-4 mx-auto d-flex justify-content-center">
         <div className="w-75">
           <div>
             <h1 className="mt-5 mb-4 text-center">Review Contents</h1>
@@ -125,7 +129,12 @@ const ReviewForm = ({ data }) => {
                   </Form.Group>
                 </Row>
                 <div className="d-flex justify-content-end">
-                  <Button variant="outline-info" type="submit" className="mb-5">
+                  <Button 
+                  variant="outline-info" 
+                  type="submit" 
+                  className="mb-5"
+                  onClick={notify}
+                  >
                     Review
                   </Button>
                 </div>
@@ -149,6 +158,18 @@ const ReviewForm = ({ data }) => {
           )}
         </div>
       </div>
+      <ToastContainer
+      position="top-center"
+      autoClose={500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+       />
     </Col>
   );
 };

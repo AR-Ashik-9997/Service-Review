@@ -7,14 +7,24 @@ const Header = () => {
   const { user, Logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSignOut = () => {
-    Logout().then(() => {});
-    navigate("/").catch((error) => console.error(error));
+    localStorage.removeItem('secret-token');
+    Logout()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <Navbar expand="lg" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fs-2">
-          <img src="https://i.postimg.cc/KcqYmHwd/Lu-We0-OKt-La9e-S-523-PS-transformed-removebg-preview.png" className="d-inline-block align-center me-3" width="50" height="50" alt=""/>
+          <img
+            src="https://i.postimg.cc/KcqYmHwd/Lu-We0-OKt-La9e-S-523-PS-transformed-removebg-preview.png"
+            className="d-inline-block align-center me-3"
+            width="50"
+            height="50"
+            alt=""
+          />
           Online Delivery Service
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,7 +42,7 @@ const Header = () => {
                   My Review
                 </Nav.Link>
                 <Nav.Link as={Link} className="fs-5" to="/add-service">
-                Add service
+                  Add service
                 </Nav.Link>
                 <Nav.Link
                   as={Link}

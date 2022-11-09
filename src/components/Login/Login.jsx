@@ -5,14 +5,15 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as EmailValidator from "email-validator";
 import { BiLogInCircle } from "react-icons/bi";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
 import useTitle from "../../utility/tittleHooks";
 const Login = () => {
   useTitle("Sign-in")
   const navigate = useNavigate();
-  const { signInGoogle, SignInForm } = useContext(AuthContext);
+  const { signInGoogle, SignInForm,signInGithub } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const [userInfo, setUserInfo] = useState({
@@ -41,7 +42,20 @@ const Login = () => {
     SignInForm(email, password)
       .then((res) => {
         const user = res.user;
-        console.log(user);
+        const currentUser = {
+          email: user.email,
+        }
+        fetch("http://localhost:5000/jwt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {        
+        localStorage.setItem('secret-token', data.token)        
+      });
         setErrors({ ...errors, firebase: "" });
         form.reset();
         navigate(from, { replace: true });
@@ -53,9 +67,51 @@ const Login = () => {
 
   const googleSignIn = () => {
     signInGoogle(googleProvider)
-      .then(() => {
+      .then((res) => {
         setErrors({ ...errors, firebase: "" });
-        navigate(from, { replace: true });
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        }
+        fetch("http://localhost:5000/jwt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {        
+        localStorage.setItem('secret-token', data.token) 
+        navigate(from, { replace: true });       
+      });
+        
+      })
+      .catch((error) => {
+        setErrors({ ...errors, firebase: error.message });
+      });
+  };
+  const GithubSignIn = () => {
+    signInGithub(githubProvider)
+      .then((res) => {
+        setErrors({ ...errors, firebase:""});
+        const user = res.user;
+        const currentUser = {
+          email: user.email,
+        }
+        fetch("http://localhost:5000/jwt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentUser),
+    })
+      .then((response) => response.json())
+      .then((data) => {        
+        localStorage.setItem('secret-token', data.token) 
+        navigate(from, { replace: true });       
+      });
+        
       })
       .catch((error) => {
         setErrors({ ...errors, firebase: error.message });
@@ -125,7 +181,7 @@ const Login = () => {
               <Button variant="outline-dark" onClick={googleSignIn}>
                 <FcGoogle className="fs-1" />
               </Button>
-              <Button variant="outline-dark" className="ms-4">
+              <Button variant="outline-dark" className="ms-4" onClick={GithubSignIn}>
                 <BsGithub className="fs-1" />
               </Button>
             </div>

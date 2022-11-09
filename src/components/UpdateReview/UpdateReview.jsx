@@ -1,10 +1,11 @@
 import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLoaderData } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const UpdateReview = () => {
   const reviewData = useLoaderData();
-
+  const notify = () => toast.success("Successfuly updated");
   const handleSubmit = (event) => {
     event.preventDefault();
     const form= event.target;
@@ -25,6 +26,7 @@ const UpdateReview = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,        
       },
       body: JSON.stringify(update),
     })
@@ -125,17 +127,30 @@ const UpdateReview = () => {
               </Form.Group>
               <div className="d-flex justify-content-center pb-5 pt-4">
                 <Button
-                  variant="outline-info"
+                  variant="outline-success"
                   type="submit"
                   className="w-75 mb-4 rounded-3"
+                  onClick={notify}
                 >
-                  Sign-Up
+                  Updated
                 </Button>
               </div>
             </Form>
           </div>
         </Col>
       </Row>
+      <ToastContainer
+      position="top-center"
+      autoClose={500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+       />
     </Container>
   );
 };
