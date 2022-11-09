@@ -7,7 +7,9 @@ import * as EmailValidator from "email-validator";
 import { BiLogInCircle } from "react-icons/bi";
 import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/tittleHooks";
 const Login = () => {
+  useTitle("Sign-in")
   const navigate = useNavigate();
   const { signInGoogle, SignInForm } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import useTitle from "../../utility/tittleHooks";
 
 const AddServices = () => {
+ useTitle("Add Services");
   const [user, setUser] = useState({});
   const handleSubmit = (event) => {
     event.preventDefault();

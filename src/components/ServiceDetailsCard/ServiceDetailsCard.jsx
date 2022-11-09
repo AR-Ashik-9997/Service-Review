@@ -2,7 +2,9 @@ import React from "react";
 import { Card, Col } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import useTitle from "../../utility/tittleHooks";
 const ServiceDetailsCard = ({ data }) => {
+  useTitle("Service details");
   const { name, image, price, description } = data;
   return (
     <Col lg={7} md={6} sm={12}>

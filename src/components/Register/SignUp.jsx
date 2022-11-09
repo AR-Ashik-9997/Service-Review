@@ -3,9 +3,11 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import * as EmailValidator from "email-validator";
 import { AuthContext } from "../../utility/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../utility/tittleHooks";
 
 const SignUp = () => {
-    const navigate=useNavigate();
+  useTitle('Sign-up')
+  const navigate = useNavigate();
   const { signUp, updateUserProfile } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -64,7 +66,7 @@ const SignUp = () => {
       .then(() => {
         setErrors({ ...errors, firebase: "" });
         form.reset();
-        handleupdateProfile(username, photo);        
+        handleupdateProfile(username, photo);
         navigate("/");
       })
       .catch((error) => {

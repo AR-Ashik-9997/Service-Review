@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
+import useTitle from "../../utility/tittleHooks";
 
 const MyReviews = () => {
+  useTitle("My Review");
   const { user } = useContext(AuthContext);
   const [userReviews, setUserReviews] = useState([]);
 

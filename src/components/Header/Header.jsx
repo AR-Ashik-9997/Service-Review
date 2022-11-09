@@ -14,7 +14,8 @@ const Header = () => {
     <Navbar expand="lg" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fs-2">
-          Courier Service
+          <img src="https://i.postimg.cc/KcqYmHwd/Lu-We0-OKt-La9e-S-523-PS-transformed-removebg-preview.png" className="d-inline-block align-center me-3" width="50" height="50" alt=""/>
+          Online Delivery Service
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

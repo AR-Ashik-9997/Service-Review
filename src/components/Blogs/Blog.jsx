@@ -1,7 +1,9 @@
 import React from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
+import useTitle from "../../utility/tittleHooks";
 
 const Blog = () => {
+  useTitle("Blog");
   return (
     <div className="home-container mt-5 pt-5">
       <Container>
