@@ -17,7 +17,7 @@ const Home = () => {
               <div className="mt-5 d-flex justify-content-center alighm-items-center">
                 <div className=" align-self-center">
                   <h1 className="mt-5 text-white">
-                    A trusted provider of courier services.
+                    A trusted provider of online delivery services.
                   </h1>
                   <p className="mt-3 text-white fs-5 text-justify">
                     We deliver your products safely to your home in a reasonable
@@ -44,9 +44,9 @@ const Home = () => {
           <Row>
             <h1 className="mt-5 text-white text-center">Our Services</h1>
             <p className="text-white text-justify fs-5 mt-3 mb-5">
-              FastRyders Logistics company is established to help your business
+            online delivery service company is established to help your business
               minimize your busyness. A business in this age can only thrive by
-              satisfying customers through innovation. At Fastryders we are
+              satisfying customers through innovation. At online delivery services we are
               committed to cater logistics requirements for your business in a
               fast, measurable and scalable way.
             </p>

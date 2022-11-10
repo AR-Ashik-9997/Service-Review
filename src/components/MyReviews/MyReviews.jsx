@@ -53,10 +53,12 @@ const MyReviews = () => {
   return (
     <div className="home-container top-margin">
       <Container className="home-container">
-        <Row>
+        <Row>          
           <Col lg={12} md={12} sm={12}>
             <div className="mt-5 mb-5">
               {userReviews.length > 0 ? (
+                <>
+                <h1 className="text-white text-center mb-5">My Review</h1>
                 <Table striped bordered hover>
                   <thead>
                     <tr>
@@ -112,6 +114,7 @@ const MyReviews = () => {
                     ))}
                   </tbody>
                 </Table>
+                </>
               ) : (
                 <h1 className="text-white text-center mt-5 mb-5">
                   Your Review is Empty

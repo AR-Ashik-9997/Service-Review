@@ -8,6 +8,7 @@ const Blog = () => {
     <div className="home-container top-margin">
       <Container>
         <Row>
+          <h1 className="text-center text-white mb-5">My Blog Page</h1>
           <Col lg={12} md={12} sm={12}>
             <Accordion defaultActiveKey={["0", "1", "2", "3"]} alwaysOpen>
             <Accordion.Item eventKey="1">
