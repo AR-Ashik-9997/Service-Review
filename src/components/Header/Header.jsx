@@ -25,7 +25,7 @@ const Header = () => {
             height="50"
             alt=""
           />
-          Online Delivery Service
+          Online delivery service review
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
