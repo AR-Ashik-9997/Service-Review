@@ -23,7 +23,7 @@ const ReviewForm = ({ dataReview }) => {
     const email = form.email.value;
     const rating = form.ratings.value;
     const description = form.description.value;
-    const date=new Date();
+    const currentTime=new Date().getMinutes()+":"+new Date().getSeconds();
     const review = {
       serviceId: dataReview._id,
       serviceName: dataReview.name,
@@ -32,7 +32,7 @@ const ReviewForm = ({ dataReview }) => {
       email: email,
       name: name,
       image: user?.photoURL,
-      date:date,
+      time:currentTime,
     };
     fetch("https://service-data.vercel.app/add-review", {
       method: "POST",
