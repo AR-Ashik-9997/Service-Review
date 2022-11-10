@@ -1,49 +1,47 @@
 import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useLoaderData} from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const UpdateReview = () => {
-  const reviewData = useLoaderData();
+  const reviewData = useLoaderData(); 
   const notify = () => toast.success("Successfuly updated");
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form= event.target;
-    const image= form.image.value;
-    const name= form.name.value;
-    const serviceName= form.serviceName.value;
-    const rating= form.rating.value;
-    const description= form.description.value;
-    const update={
-        image: image,
-        name: name,
-        serviceName: serviceName,
-        rating: rating,
-        description: description,
-    }
+    const form = event.target;
+    const image = form.image.value;
+    const name = form.name.value;
+    const serviceName = form.serviceName.value;
+    const rating = form.rating.value;
+    const description = form.description.value;
+    const update = {
+      image: image,
+      name: name,
+      serviceName: serviceName,
+      rating: rating,
+      description: description,
+    };
 
     fetch(`https://service-data.vercel.app/update-reviews/${reviewData._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("secret-token")}`,        
+        authorization: `Bearer ${localStorage.getItem("secret-token")}`,
       },
       body: JSON.stringify(update),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      });  
-   
+      .then({});
+    
   };
-  
+
   return (
     <Container className="home-container">
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
             <img
-              src="https://cdni.iconscout.com/illustration/premium/thumb/sign-up-login-4489366-3723273.png"
+              src="https://i.postimg.cc/tgmQJzY2/system-update-isometric-illustration-concept-108061-532-removebg-preview.png"
               alt=""
               className="d-block img-fluid mx-auto"
             />
@@ -57,7 +55,7 @@ const UpdateReview = () => {
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
-                <Form.Control                
+                <Form.Control
                   type="text"
                   name="image"
                   placeholder="photo-url"
@@ -72,7 +70,6 @@ const UpdateReview = () => {
                 controlId="exampleForm.ControlInput2"
               >
                 <Form.Control
-                 
                   name="name"
                   type="text"
                   placeholder="username"
@@ -86,7 +83,6 @@ const UpdateReview = () => {
                 controlId="exampleForm.ControlInput3"
               >
                 <Form.Control
-              
                   name="serviceName"
                   type="text"
                   placeholder="serviceName"
@@ -100,7 +96,6 @@ const UpdateReview = () => {
                 controlId="exampleForm.ControlInput4"
               >
                 <Form.Control
-                 
                   name="rating"
                   type="number"
                   step="any"
@@ -115,7 +110,6 @@ const UpdateReview = () => {
                 controlId="exampleForm.ControlTextarea1"
               >
                 <Form.Control
-                 
                   name="description"
                   as="textarea"
                   defaultValue={reviewData.description}
@@ -140,17 +134,17 @@ const UpdateReview = () => {
         </Col>
       </Row>
       <ToastContainer
-      position="top-center"
-      autoClose={500}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-       />
+        position="top-center"
+        autoClose={500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </Container>
   );
 };
