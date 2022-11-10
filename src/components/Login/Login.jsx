@@ -111,7 +111,7 @@ const Login = () => {
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
             <img
-              src="https://i.postimg.cc/J09XnMKn/isometric-removebg-preview.png"
+              src="https://i.postimg.cc/63D018m9/man-stands-front-inputted-secured-data-registration-form-login-user-interface-isometric-flat-illustr.png"
               alt=""
               className="d-block img-fluid mx-auto"
             />
