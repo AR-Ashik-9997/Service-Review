@@ -9,23 +9,26 @@ import MyReviews from "../components/MyReviews/MyReviews";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import SignUp from "../components/Register/SignUp";
 import UpdateReview from "../components/UpdateReview/UpdateReview";
+import ErrorPage from "./ErrorPage";
 import Root from "./Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement:<ErrorPage/>,
     children: [
-      {
-        path: "/",element: <Home />,loader: async () => fetch("https://service-data.vercel.app/services"),
-      },
-      {path: "/services",element: <AllServices />,loader: async () => fetch("https://service-data.vercel.app/all-services"),
-      },
+      {path: "/", element: <Home />,loader: async ({ params }) =>
+      fetch(`https://service-data.vercel.app/services`
+      ),},
+      { path: "/services", element: <AllServices /> },
       {
         path: "/details-service/:id",
         element: <DetailsService />,
         loader: async ({ params }) =>
-          fetch(`https://service-data.vercel.app/details-services/${params.id}`),
+          fetch(
+            `https://service-data.vercel.app/details-services/${params.id}`
+          ),
       },
       {
         path: "/my-review",

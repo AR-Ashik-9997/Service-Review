@@ -1,17 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import * as EmailValidator from "email-validator";
 import { AuthContext } from "../../utility/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import useTitle from "../../utility/tittleHooks";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
-  const notify = () => toast.success("Sign-in success!");
   useTitle("Sign-up");
   const navigate = useNavigate();
   const { signUp, updateUserProfile } = useContext(AuthContext);
+  const [loading, setLoading]= useState(false);
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -84,6 +82,7 @@ const SignUp = () => {
             localStorage.setItem("secret-token", data.token);
           });
         setErrors({ ...errors, firebase: "" });
+        setLoading(false);
         form.reset();
         navigate("/");
       })
@@ -107,6 +106,7 @@ const SignUp = () => {
 
   return (
     <Container className="home-container">
+      {loading?(<div className="d-flex justify-content-center"><Spinner animation="border" variant="success" /></div>):<></>}
       <Row>
         <Col lg={6} md={6} sm={12}>
           <div className="mt-5 pt-5">
@@ -171,7 +171,7 @@ const SignUp = () => {
                   variant="outline-info"
                   type="submit"
                   className="w-75 mb-4 rounded-3"
-                  onClick={notify}
+                  onClick={()=>setLoading(true)}
                 >
                   Sign-Up
                 </Button>
@@ -179,19 +179,7 @@ const SignUp = () => {
             </Form>
           </div>
         </Col>
-      </Row>
-      <ToastContainer
-      position="top-center"
-      autoClose={500}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-       />
+      </Row>      
     </Container>
   );
 };

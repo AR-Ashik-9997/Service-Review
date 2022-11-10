@@ -35,4 +35,10 @@ input::-webkit-inner-spin-button {
 .card-bg{
   background-image: linear-gradient(to bottom, #06162c, #1e1431, #360c2c, #47021e, #4e0603);
 }
+.bg-error{
+  height: 90vh; 
+}
+.error-img{
+  margin-top: 10rem;
+}
 

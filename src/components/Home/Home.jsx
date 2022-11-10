@@ -1,14 +1,15 @@
 import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row} from "react-bootstrap";
 import { Link, useLoaderData } from "react-router-dom";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { BiRightArrowAlt } from "react-icons/bi";
 import useTitle from "../../utility/tittleHooks";
+
 const Home = () => {
-  const servicesData = useLoaderData();
+  const services = useLoaderData();
   useTitle("Online delivery service");
   return (
-    <>
+    <div>
       <section className="top-margin mb-5">
         <Container>
           <Row>
@@ -49,7 +50,7 @@ const Home = () => {
               committed to cater logistics requirements for your business in a
               fast, measurable and scalable way.
             </p>
-            {servicesData.map((data) => (
+            {services.map((data) => (
               <ServiceCard data={data} key={data._id} />
             ))}
             <div className="d-flex justify-content-end mt-4">
@@ -67,41 +68,62 @@ const Home = () => {
           <Row>
             <Col lg={4} md={6} sm={12}>
               <Card className="mt-3 card-bg rounded-5">
-                <Card.Img variant="top" src="https://pathao.com/wp-content/uploads/2018/12/Live-Product-Status.jpg" className="card-image" />
+                <Card.Img
+                  variant="top"
+                  src="https://pathao.com/wp-content/uploads/2018/12/Live-Product-Status.jpg"
+                  className="card-image"
+                />
                 <Card.Body className="rounded-5">
-                  <Card.Title className="fs-2 text-white text-center">Live Product Status</Card.Title>                  
+                  <Card.Title className="fs-2 text-white text-center">
+                    Live Product Status
+                  </Card.Title>
                   <Card.Text className="text-justify text-white">
-                  We provide you the option of real time delivery state with which you can know the current status of product delivery.                 
-                  </Card.Text>                  
+                    We provide you the option of real time delivery state with
+                    which you can know the current status of product delivery.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col lg={4} md={6} sm={12}>
-            <Card className="mt-3 card-bg rounded-5">
-                <Card.Img variant="top" src="https://pathao.com/wp-content/uploads/2018/12/Call-Center-Support.jpg" className="card-image" />
+              <Card className="mt-3 card-bg rounded-5">
+                <Card.Img
+                  variant="top"
+                  src="https://pathao.com/wp-content/uploads/2018/12/Call-Center-Support.jpg"
+                  className="card-image"
+                />
                 <Card.Body className="rounded-5">
-                  <Card.Title className="fs-2 text-white text-center">Call Center Support</Card.Title>                  
+                  <Card.Title className="fs-2 text-white text-center">
+                    Call Center Support
+                  </Card.Title>
                   <Card.Text className="text-justify text-white">
-                  Call center support and key account managers are provided for all sorts of queries and needs of the clients.                 
-                  </Card.Text>                  
+                    Call center support and key account managers are provided
+                    for all sorts of queries and needs of the clients.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col lg={4} md={6} sm={12}>
-            <Card className="mt-3 card-bg rounded-5">
-                <Card.Img variant="top" src="https://pathao.com/wp-content/uploads/2018/12/Insurance-Coverage-Courier.jpg" className="card-image" />
+              <Card className="mt-3 card-bg rounded-5">
+                <Card.Img
+                  variant="top"
+                  src="https://pathao.com/wp-content/uploads/2018/12/Insurance-Coverage-Courier.jpg"
+                  className="card-image"
+                />
                 <Card.Body className="rounded-5">
-                  <Card.Title className="fs-2 text-white text-center">100% Insurance Coverage</Card.Title>                  
+                  <Card.Title className="fs-2 text-white text-center">
+                    100% Insurance Coverage
+                  </Card.Title>
                   <Card.Text className="text-justify text-white">
-                  We take full responsibility of the deliveries by providing 100% insurance coverage.                 
-                  </Card.Text>                  
+                    We take full responsibility of the deliveries by providing
+                    100% insurance coverage.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
         </Container>
       </section>
-    </>
+    </div>
   );
 };
 

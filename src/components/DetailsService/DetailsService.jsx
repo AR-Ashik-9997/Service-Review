@@ -12,7 +12,7 @@ const DetailsService = () => {
     <Container>
       <Row>
         <ServiceDetailsCard data={DetailsData} />
-        <ReviewForm data={DetailsData} />
+        <ReviewForm dataReview={DetailsData} />
       </Row>
     </Container>
     </div>

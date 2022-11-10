@@ -5,18 +5,17 @@ import { AuthContext } from "../../utility/AuthProvider";
 import ServiceReview from "../ServiceReview/ServiceReview";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const ReviewForm = ({ data }) => {
+const ReviewForm = ({ dataReview }) => {
   const notify = () => toast.success("Successfully review added!");
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`https://service-data.vercel.app/all-reviews?serviceId=${data._id}`)
+    fetch(`https://service-data.vercel.app/all-reviews?serviceId=${dataReview._id}`)
       .then((response) => response.json())
       .then((data) => setReviews(data));
-  }, [data._id]);
-
+  }, [dataReview._id]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -24,14 +23,16 @@ const ReviewForm = ({ data }) => {
     const email = form.email.value;
     const rating = form.ratings.value;
     const description = form.description.value;
+    const date=new Date();
     const review = {
-      serviceId: data._id,
-      serviceName: data.name,
+      serviceId: dataReview._id,
+      serviceName: dataReview.name,
       rating: rating,
       description: description,
       email: email,
       name: name,
       image: user?.photoURL,
+      date:date,
     };
     fetch("https://service-data.vercel.app/add-review", {
       method: "POST",
@@ -42,9 +43,7 @@ const ReviewForm = ({ data }) => {
       body: JSON.stringify(review),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      });
+      .then({});
     form.reset();
   };
 

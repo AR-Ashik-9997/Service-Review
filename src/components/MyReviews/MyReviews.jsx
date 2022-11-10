@@ -3,11 +3,13 @@ import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../utility/AuthProvider";
 import useTitle from "../../utility/tittleHooks";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const MyReviews = () => { 
+  const notify = () => toast.error("Successfully deleted");
   useTitle("My Review");
   const { user, Logout } = useContext(AuthContext);
-  const [userReviews, setUserReviews] = useState([]);
-
+  const [userReviews, setUserReviews] = useState([]);  
   useEffect(() => {
     fetch(`https://service-data.vercel.app/user-reviews?email=${user.email}`, {
       headers: {
@@ -42,9 +44,11 @@ const MyReviews = () => {
               (rvw) => rvw._id !== review._id
             );
             setUserReviews(remaining);
+            notify();           
           }
         });
     }
+    
   };
   return (
     <div className="home-container top-margin">
@@ -66,7 +70,9 @@ const MyReviews = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {userReviews.map((review) => (
+
+                    {                      
+                    userReviews.map((review) => (
                       <tr key={review._id}>
                         <td className="text-white">
                           <img
@@ -115,6 +121,18 @@ const MyReviews = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer
+      position="top-center"
+      autoClose={500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+       />
     </div>
   );
 };
