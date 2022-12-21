@@ -1,13 +1,24 @@
-import React from "react";
-import { Button, Card, Col, Container, Row} from "react-bootstrap";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { BiRightArrowAlt } from "react-icons/bi";
 import useTitle from "../../utility/tittleHooks";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
-  const services = useLoaderData();
   useTitle("Online delivery service");
+  const [loading, setLoading] = useState(true);
+  const { data: services = [] } = useQuery({
+    queryKey: ["services"],
+    queryFn: async () => {
+      const res = await fetch("https://service-data.vercel.app/services");
+      const data = await res.json();
+      setLoading(false);
+      return data;
+    },
+  });
+
   return (
     <div>
       <section className="top-margin mb-5">
@@ -32,40 +43,58 @@ const Home = () => {
                 <img
                   src="https://s3-eu-central-1.amazonaws.com/eurosender-blog/wp-content/uploads/2021/09/21074005/Door-to-door.png"
                   alt=""
-                  className="img-fluid"
+                  className="img-fluid mx-auto d-block"
                 />
               </div>
             </Col>
           </Row>
         </Container>
       </section>
-      <section className="top-margin mt-5">
-        <Container>
-          <Row>
-            <h1 className="mt-5 text-white text-center">Our Services</h1>
-            <p className="text-white text-justify fs-5 mt-3 mb-5">
-            online delivery service company is established to help your business
-              minimize your busyness. A business in this age can only thrive by
-              satisfying customers through innovation. At online delivery services we are
-              committed to cater logistics requirements for your business in a
-              fast, measurable and scalable way.
-            </p>
-            {services.map((data) => (
-              <ServiceCard data={data} key={data._id} />
-            ))}
-            <div className="d-flex justify-content-end mt-4">
-              <Link to="/services">
-                <Button variant="outline-info">
-                  See All <BiRightArrowAlt />
-                </Button>
-              </Link>
-            </div>
-          </Row>
-        </Container>
-      </section>
+      {loading === true ? (
+        <div className="d-flex justify-content-center loading">
+        <Spinner animation="border" variant="success" />
+      </div>
+      ) : (
+        <section className="top-margin mt-5">
+          <Container>
+            <Row>
+              <h1 className="mt-5 text-white text-center">Our Services</h1>
+              <p className="text-white text-justify fs-5 mt-3 mb-5">
+                online delivery service company is established to help your
+                business minimize your busyness. A business in this age can only
+                thrive by satisfying customers through innovation. At online
+                delivery services we are committed to cater logistics
+                requirements for your business in a fast, measurable and
+                scalable way.
+              </p>
+              {services.map((data) => (
+                <ServiceCard data={data} key={data._id} />
+              ))}
+              <div className="d-flex justify-content-end mt-4">
+                <div className="d-none d-md-block">
+                <Link to="/services">
+                  <Button variant="btn-md text-white" className="secondary-btn">
+                    See All <BiRightArrowAlt />
+                  </Button>
+                </Link>
+                </div>
+                
+              </div>
+              <div className="d-flex justify-content-center mt-4 d-sm-block d-lg-none d-md-none">
+                <Link to="/services">
+                  <Button variant="btn-md text-white" className="secondary-btn">
+                    See All <BiRightArrowAlt />
+                  </Button>
+                </Link>
+              </div>
+            </Row>
+          </Container>
+        </section>
+      )}
       <section className="top-margin">
         <Container>
           <Row>
+            <h1 className="mb-4 text-white text-center">Our Supports</h1>
             <Col lg={4} md={6} sm={12}>
               <Card className="mt-3 card-bg rounded-5">
                 <Card.Img
@@ -114,8 +143,9 @@ const Home = () => {
                     100% Insurance Coverage
                   </Card.Title>
                   <Card.Text className="text-justify text-white">
-                    We take full responsibility of the deliveries by providing
-                    100% insurance coverage.
+                    the insurance policy is a contract between the insurer and
+                    the policyholder. We take full responsibility of the
+                    deliveries by providing 100% insurance coverage.
                   </Card.Text>
                 </Card.Body>
               </Card>

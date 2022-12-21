@@ -129,7 +129,7 @@ const ReviewForm = ({ dataReview }) => {
                 </Row>
                 <div className="d-flex justify-content-end">
                   <Button 
-                  variant="outline-info" 
+                  variant="outline-dark" 
                   type="submit" 
                   className="mb-5"
                   onClick={notify}

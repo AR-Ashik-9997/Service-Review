@@ -156,7 +156,7 @@ const Login = () => {
               </div>
             </Form>
             <p className="text-center mb-4">
-              Dont have an account?
+              Dont have an account?<br className="d-lg-none d-md-none d-sm-block "/>
               <NavLink
                 to="/sign-up"
                 className="text-decoration-none text-danger"

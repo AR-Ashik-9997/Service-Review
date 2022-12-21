@@ -13,7 +13,7 @@ const ServiceCard = ({ data }) => {
       <Card className="mt-3 rounded-3">
         <PhotoProvider>
           <PhotoView src={image}>
-            <Card.Img variant="top" src={image} className="pointer card-image rounded-3" />
+            <Card.Img variant="top" src={image} className="pointer card-image rounded-3 " />
           </PhotoView>
         </PhotoProvider>
         <Card.Body >
@@ -24,7 +24,7 @@ const ServiceCard = ({ data }) => {
           <hr />
           <Card.Text className="text-justify">{description.substr(0, 100)}</Card.Text>
           <div className="d-flex justify-content-end">
-            <Link to={`/details-service/${_id}`}><Button variant="outline-info">View Details</Button></Link>
+            <Link to={`/details-service/${_id}`}><Button variant="outline-dark">View Details</Button></Link>
           </div>
         </Card.Body>
       </Card>

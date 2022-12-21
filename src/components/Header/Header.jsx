@@ -25,7 +25,7 @@ const Header = () => {
             height="50"
             alt=""
           />
-          Online delivery service review
+          Online Delivery Service
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -66,7 +66,8 @@ const Header = () => {
               <div className="d-flex align-items-center d-grid gap-3 d-block">
                 <Button
                   onClick={handleSignOut}
-                  variant="outline-info btn-md text-white"
+                  variant="btn-md text-white"
+                  className="primary-btn"
                 >
                   Sign-Out
                 </Button>

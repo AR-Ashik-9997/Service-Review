@@ -18,9 +18,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement:<ErrorPage/>,
     children: [
-      {path: "/", element: <Home />,loader: async ({ params }) =>
-      fetch(`https://service-data.vercel.app/services`
-      ),},
+      {path: "/", element: <Home />},
       { path: "/services", element: <AllServices /> },
       {
         path: "/details-service/:id",

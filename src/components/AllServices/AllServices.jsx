@@ -17,7 +17,7 @@ const AllServices = () => {
   }, []);
   if (loading) {
     return (
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center loading">
         <Spinner animation="border" variant="success" />
       </div>
     );

@@ -24,7 +24,7 @@ const AllServicesCards = ({ data }) => {
           </Card.Text>
           <div className="d-flex justify-content-end">
             <Link to={`/details-service/${_id}`}>
-              <Button variant="outline-info">View Details</Button>
+              <Button variant="outline-dark">View Details</Button>
             </Link>
           </div>
         </Card.Body>

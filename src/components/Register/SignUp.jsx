@@ -10,6 +10,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { signUp, updateUserProfile } = useContext(AuthContext);
   const [loading, setLoading]= useState(false);
+  const [imageUrl, setImageUrl] = useState("");
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -55,53 +56,73 @@ const SignUp = () => {
       setUserInfo({ ...userInfo, password: e.target.value });
     }
   };
+  const handleImage = (event) => {
+    const img = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", img);
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          setImageUrl(imgData.data.url);
+        }
+      });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const username = form.username.value;
-    const photo = form.photoUrl.value;
-    const email = userInfo.email;
-    const password = userInfo.password;
-    signUp(email, password)
-      .then((res) => {
-        handleupdateProfile(username, photo);
-        const user = res.user;
-        const currentUser = {
-          email: user.email,
-        };
-        fetch("https://service-data.vercel.app/jwt ", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
+    if(loading===false){
+      setLoading(true);    
+      const form = event.target;
+      const username = form.username.value;
+      const photo = imageUrl;
+      const email = userInfo.email;
+      const password = userInfo.password;    
+      signUp(email, password)
+        .then((res) => {
+          handleupdateProfile(username, photo);
+          const user = res.user;
+          const currentUser = {
+            email: user.email,
+          };          
+          fetch("https://service-data.vercel.app/jwt ", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(currentUser),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              localStorage.setItem("secret-token", data.token);
+            });
+          setErrors({ ...errors, firebase: "" });
+          setLoading(false);
+          form.reset();
+          navigate("/");
         })
-          .then((response) => response.json())
-          .then((data) => {
-            localStorage.setItem("secret-token", data.token);
-          });
-        setErrors({ ...errors, firebase: "" });
-        setLoading(false);
-        form.reset();
-        navigate("/");
-      })
-      .catch((error) => {
-        setErrors({ ...errors, firebase: error.message });
-      });
-  };
-  const handleupdateProfile = (name, photoUrl) => {
-    const profile = {
-      displayName: name,
-      photoURL: photoUrl,
+        .catch((error) => {
+          setErrors({ ...errors, firebase: error.message });
+        });
     };
-    updateUserProfile(profile)
-      .then(() => {
-        setErrors({ ...errors, firebase: "" });
-      })
-      .catch((error) => {
-        setErrors({ ...errors, firebase: error.message });
-      });
+    const handleupdateProfile = (name, photoUrl) => {
+      const profile = {
+        displayName: name,
+        photoURL: photoUrl,
+      };      
+      updateUserProfile(profile)
+        .then(() => {
+          setErrors({ ...errors, firebase: "" });
+        })
+        .catch((error) => {
+          setErrors({ ...errors, firebase: error.message });
+        });
+    }
+    
   };
 
   return (
@@ -131,16 +152,17 @@ const SignUp = () => {
                   autoComplete="off"
                 />
               </Form.Group>
-              <Form.Group className="mb-4" controlId="formBasicphoto">
+              <Form.Group className="mb-4" controlId="formBasicphoto">              
                 <Form.Control
-                  name="photoUrl"
-                  type="text"
-                  placeholder="Photo-URL"
+                  name="image"
+                  type="file"                  
                   className="rounded-3"
-                  required
                   autoComplete="off"
+                  onChange={handleImage}
+                  required
+                  
                 />
-              </Form.Group>
+              </Form.Group>             
               <Form.Group className="mb-4" controlId="formBasicEmail">
                 <Form.Control
                   name="email"
@@ -170,8 +192,7 @@ const SignUp = () => {
                 <Button
                   variant="outline-info"
                   type="submit"
-                  className="w-75 mb-4 rounded-3"
-                  onClick={()=>setLoading(true)}
+                  className="w-75 mb-4 rounded-3"                  
                 >
                   Sign-Up
                 </Button>
